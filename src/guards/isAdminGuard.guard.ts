@@ -2,10 +2,11 @@ import { CanActivate, ExecutionContext, Injectable, UnauthorizedException } from
 // import { ROLES } from '../constants/role.constants';
 
 @Injectable()
-export class IsUserGuard implements CanActivate {
+export class IsAdminGuard implements CanActivate {
   async canActivate(context: ExecutionContext): Promise<boolean> {
     const request = context.switchToHttp().getRequest();
-    if (request.user.role !== "user") {
+    console.log(request);
+    if (request.user.role !== "admin") {
       throw new UnauthorizedException('No tienes permisos para acceder a este recurso');
     }
 
